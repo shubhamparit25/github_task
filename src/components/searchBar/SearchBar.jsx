@@ -11,7 +11,7 @@ const SearchBar = ({ onSearch, isDarkMode }) => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#444' : '#f1f1f1' }]}>
+    <View style={[styles.container]}>
       <TextInput
         style={[
           styles.input,

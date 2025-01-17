@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 15,
+    borderRadius: 20,
   },
 });
 

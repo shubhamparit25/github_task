@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   darkContainer: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#333',
+    backgroundColor: '#000',
   },
   text: {
     color: '#000',

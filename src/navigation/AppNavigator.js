@@ -21,7 +21,7 @@ const AppNavigator = () => {
             name="Search"
             component={SearchScreen}
             options={({ navigation }) => ({
-              title: 'Search Repositories',
+              title: 'GitHub Repositories',
               headerRight: () => (
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 20 }}>
                   <Ionicons

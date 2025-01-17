@@ -24,7 +24,7 @@ const RepositoryCard = ({ repo, onToggleFavorite, isFavorite, loading, theme }) 
   }
 
   return (
-    <View style={[styles.card, isFavorite && styles.favoriteCard]}>
+    <View style={[styles.card]}>
       <Image
         source={{ uri: repo?.owner?.avatar_url || 'https://via.placeholder.com/60' }}
         style={styles.avatar}

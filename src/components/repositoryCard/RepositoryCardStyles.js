@@ -68,8 +68,6 @@ export const darkStyles = StyleSheet.create({
     marginBottom: 15,
     backgroundColor: '#333',
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: 'white',
     shadowColor: '#000',
     shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 3 },
@@ -78,9 +76,6 @@ export const darkStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     position: 'relative',
-  },
-  favoriteCard: {
-    backgroundColor: '#444',
   },
   avatar: {
     width: 60,

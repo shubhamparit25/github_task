@@ -7,7 +7,18 @@ import RepositoryCard from '../../components/repositoryCard/RepositoryCard';
 import SearchBar from '../../components/searchBar/SearchBar';
 import { useDarkMode } from '../../context/DarkModeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import styles from './SearchScreenStyles.';
+import styles from './SearchScreenStyles';
+
+const removeDuplicates = (array) => {
+  const uniqueIds = new Set();
+  return array.filter((item) => {
+    if (uniqueIds.has(item.id)) {
+      return false;
+    }
+    uniqueIds.add(item.id);
+    return true;
+  });
+};
 
 const SearchScreen = () => {
   const { isDarkMode } = useDarkMode();
@@ -38,12 +49,19 @@ const SearchScreen = () => {
   };
 
   const handleToggleFavorite = async (repo) => {
-    const updatedFavorites = favorites.includes(repo)
+    const isFavorite = favorites.some((item) => item.id === repo.id);
+
+    const updatedFavorites = isFavorite
       ? favorites.filter((item) => item.id !== repo.id)
-      : [...favorites, repo];
+      : removeDuplicates([...favorites, repo]);
 
     setFavorites(updatedFavorites);
-    await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+
+    try {
+      await AsyncStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    } catch (error) {
+      console.error('Error saving favorites:', error);
+    }
   };
 
   const loadMoreRepositories = () => {
@@ -65,7 +83,10 @@ const SearchScreen = () => {
     const loadFavorites = async () => {
       try {
         const storedFavorites = await AsyncStorage.getItem('favorites');
-        if (storedFavorites) setFavorites(JSON.parse(storedFavorites));
+        if (storedFavorites) {
+          const uniqueFavorites = removeDuplicates(JSON.parse(storedFavorites));
+          setFavorites(uniqueFavorites);
+        }
       } catch (error) {
         console.error('Error loading favorites:', error);
       }
@@ -83,7 +104,7 @@ const SearchScreen = () => {
   }, [repositories, favorites]);
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? '#333' : '#fff' }]}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? '#000' : '#fff' }]}>
       <SearchBar onSearch={handleSearch} value={query} isDarkMode={isDarkMode} />
       {error && <Text style={[styles.error, { color: isDarkMode ? '#fff' : 'red' }]}>{error}</Text>}
       <FlatList
