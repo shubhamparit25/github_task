@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import { searchRepositories } from '../../redux/actions/repositoryActions';
@@ -7,6 +7,7 @@ import RepositoryCard from '../../components/repositoryCard/RepositoryCard';
 import SearchBar from '../../components/searchBar/SearchBar';
 import { useDarkMode } from '../../context/DarkModeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './SearchScreenStyles.';
 
 const SearchScreen = () => {
   const { isDarkMode } = useDarkMode();
@@ -55,9 +56,9 @@ const SearchScreen = () => {
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
-      dispatch(searchRepositories('react', 1)); // Initial search on mount
+      dispatch(searchRepositories('react', 1));
     }
-    return () => debouncedSearch.cancel(); // Cleanup debounced function
+    return () => debouncedSearch.cancel();
   }, [dispatch, debouncedSearch]);
 
   useEffect(() => {
@@ -97,7 +98,6 @@ const SearchScreen = () => {
             theme={isDarkMode ? 'dark' : 'light'}
           />
         )}
-        ListFooterComponent={loading ? <Text style={styles.loading}>Loading...</Text> : null}
         onEndReached={loadMoreRepositories}
         onEndReachedThreshold={0.5}
         ListEmptyComponent={
@@ -111,26 +111,5 @@ const SearchScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  loading: {
-    textAlign: 'center',
-    padding: 10,
-    color: '#999',
-  },
-  error: {
-    color: 'red',
-    textAlign: 'center',
-  },
-  noResults: {
-    textAlign: 'center',
-    fontSize: 18,
-    padding: 10,
-  },
-});
 
 export default SearchScreen;

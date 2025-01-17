@@ -2,8 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.github.com/search/repositories?q=';
 
-// Fetch repositories based on query, pagination, and results per page
-export const fetchRepositories = async (query, page = 1, perPage = 15, token = null) => {
+export const searchRepositories = async (query, page = 1, perPage = 15, token = null) => {
   try {
     const headers = token
       ? { Authorization: `Bearer ${token}` }
@@ -13,11 +12,11 @@ export const fetchRepositories = async (query, page = 1, perPage = 15, token = n
       headers,
       params: {
         page,
-        per_page: perPage, // Fetch only the specified number of entries
+        per_page: perPage,
       },
     });
 
-    return response.data; // Return entire response to manage pagination data in reducer
+    return response.data;
   } catch (error) {
     if (error.response) {
       const status = error.response.status;

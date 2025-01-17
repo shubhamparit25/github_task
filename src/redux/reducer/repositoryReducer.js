@@ -2,12 +2,10 @@ import {
   SEARCH_REPOSITORIES,
   SEARCH_REPOSITORIES_FAILURE,
   SEARCH_REPOSITORIES_SUCCESS,
-  TOGGLE_FAVORITE,
 } from '../actions/actionTypes';
 
 const initialState = {
   repositories: [],
-  favorites: [], // Stores favorite repositories
   loading: false,
   error: null,
   page: 1,
@@ -33,15 +31,6 @@ const repositoryReducer = (state = initialState, action) => {
 
     case SEARCH_REPOSITORIES_FAILURE:
       return { ...state, loading: false, error: action.error };
-
-    case TOGGLE_FAVORITE:
-      const repoId = action.repo.id; // Assuming each repo has a unique 'id'
-      const isAlreadyFavorite = state.favorites.some((repo) => repo.id === repoId);
-      const updatedFavorites = isAlreadyFavorite
-        ? state.favorites.filter((repo) => repo.id !== repoId)
-        : [...state.favorites, action.repo];
-
-      return { ...state, favorites: updatedFavorites };
 
     default:
       return state;

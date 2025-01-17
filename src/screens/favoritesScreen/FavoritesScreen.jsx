@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import { useDarkMode } from '../../context/DarkModeContext';
 import RepositoryCard from '../../components/repositoryCard/RepositoryCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './FavoritesScreenStyles';
 
 const FavoritesScreen = () => {
   const { isDarkMode } = useDarkMode();
@@ -43,23 +44,5 @@ const FavoritesScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  darkContainer: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#333',
-  },
-  text: {
-    color: '#000',
-  },
-  darkText: {
-    color: '#fff',
-  },
-});
 
 export default FavoritesScreen;

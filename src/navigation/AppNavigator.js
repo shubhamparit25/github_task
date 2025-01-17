@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useDarkMode } from '../context/DarkModeContext'; // Import dark mode context
+import { useDarkMode } from '../context/DarkModeContext';
 
 const SearchScreen = React.lazy(() => import('../screens/searchScreen/SearchScreen'));
 const FavoritesScreen = React.lazy(() => import('../screens/favoritesScreen/FavoritesScreen'));
@@ -11,7 +11,7 @@ const FavoritesScreen = React.lazy(() => import('../screens/favoritesScreen/Favo
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const { isDarkMode, toggleDarkMode } = useDarkMode(); // Get dark mode state
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <NavigationContainer>
@@ -27,7 +27,7 @@ const AppNavigator = () => {
                   <Ionicons
                     name="star"
                     size={25}
-                    color={'gold'}
+                    color="gold"
                     style={{ marginRight: 10 }}
                     onPress={() => navigation.navigate('Favorites')}
                   />
@@ -35,13 +35,11 @@ const AppNavigator = () => {
                     name={isDarkMode ? 'moon' : 'sunny'}
                     size={25}
                     color={isDarkMode ? '#fff' : '#000'}
-                    onPress={toggleDarkMode} // Toggle dark mode globally
+                    onPress={toggleDarkMode}
                   />
                 </View>
               ),
-              headerStyle: {
-                backgroundColor: isDarkMode ? '#333' : '#fff',
-              },
+              headerStyle: { backgroundColor: isDarkMode ? '#333' : '#fff' },
               headerTintColor: isDarkMode ? '#fff' : '#000',
             })}
           />
@@ -49,15 +47,8 @@ const AppNavigator = () => {
             name="Favorites"
             component={FavoritesScreen}
             options={{
-              headerRight: () => (
-                <View style={{ marginRight: 20 }}>
-                  {/* Add functionality if needed */}
-                </View>
-              ),
-              headerStyle: {
-                backgroundColor: isDarkMode ? '#333' : '#fff', // Dark mode background for Favorites screen
-              },
-              headerTintColor: isDarkMode ? '#fff' : '#000', // Text color based on dark mode
+              headerStyle: { backgroundColor: isDarkMode ? '#333' : '#fff' },
+              headerTintColor: isDarkMode ? '#fff' : '#000',
             }}
           />
         </Stack.Navigator>

@@ -2,7 +2,6 @@ import {
   SEARCH_REPOSITORIES,
   SEARCH_REPOSITORIES_FAILURE,
   SEARCH_REPOSITORIES_SUCCESS,
-  TOGGLE_FAVORITE,
 } from './actionTypes';
 
 // Action to initiate the search request
@@ -25,10 +24,3 @@ export const searchRepositoriesFailure = (error) => ({
   type: SEARCH_REPOSITORIES_FAILURE,
   error,
 });
-
-// Action to toggle repository as favorite or not
-export const toggleFavorite = (repo) => ({
-  type: TOGGLE_FAVORITE,
-  repo,
-});
-
